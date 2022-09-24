@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: "282969351970",
     appId: "1:282969351970:web:1f6a462889220a05a7277b",
     measurementId: "G-H160X58Z0F"
-  }
+  },
+  img:'./assets/img/heart.jfif'
 };

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ServiceFirebaseService } from '../../service-firebase.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +16,7 @@ export class MainComponent implements OnInit {
   arraySensor:any[]=[];
   arraySensorLabel:any[]=[];
   urlRitmoCardiacoBoolean:boolean = false;
+  img:string = environment.img
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
