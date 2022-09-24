@@ -1,6 +1,21 @@
-<div class="container">
+<div class="container-fluid p-0">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Medición de ritmo cardiaco</a>
+    </div>
+  </nav>
+
+  <div class="container pt-5">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 col-md-3 info-heart">
+        <img 
+          class="info-heart__img" 
+          src="../../../assets/img/heart.jfif" 
+          alt=""
+          [ngClass]="{'info-heart__img--transform-scale':urlRitmoCardiacoBoolean}">
+        <h2 class="info-heart__label">{{ritmoCardiaco}}</h2>
+      </div>
+      <div class="col-12 col-md-9 grafic-heart">
         <canvas baseChart 
                 *ngIf="arraySensor.length > 0"
                   [data]="lineChartData"
@@ -10,3 +25,4 @@
       </div>
     </div>
   </div>
+</div>

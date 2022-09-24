@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ServiceFirebaseService } from '../../service-firebase.service';
 
@@ -10,16 +10,17 @@ import { ServiceFirebaseService } from '../../service-firebase.service';
 })
 export class MainComponent implements OnInit {
 
-  urlLuz:string = 'Luz'
-  luz:any = '';
+  urlRitmoCardiaco:string = 'ritmoCardiaco'
+  ritmoCardiaco:any = '';
   arraySensor:any[]=[];
   arraySensorLabel:any[]=[];
+  urlRitmoCardiacoBoolean:boolean = false;
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
         data:this.arraySensor,
-        label: 'Series A',
+        label: 'Ritmo cardiaco',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -38,22 +39,8 @@ export class MainComponent implements OnInit {
         tension: 0.5
       }
     },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      x: {},
-      'y-axis-0':
-        {
-          position: 'left',
-        },
-      'y-axis-1': {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red'
-        }
-      }
+    animation:{
+      
     }
   };
 
@@ -75,20 +62,18 @@ export class MainComponent implements OnInit {
   }
 
   getLuz(){
-    console.log('Entro')
-    this.serviceFirebase.getValueFirebase(this.urlLuz)
+    this.serviceFirebase.getValueFirebase(this.urlRitmoCardiaco)
     .subscribe((resp) => {
-      console.log(typeof resp)
-      this.arraySensor.push(resp)
-      this.arraySensorLabel.push(this.dateActual())
-      console.log(this.arraySensorLabel);
-      this.chart?.update()
+      this.urlRitmoCardiacoBoolean = !this.urlRitmoCardiacoBoolean;
+      this.ritmoCardiaco = resp;
+      this.arraySensor.push(resp);
+      this.arraySensorLabel.push(this.dateActual());
+      this.chart?.update();
     })
   }
 
   dateActual(){
-    let fecha = new Date;
-    // let desdeStr = `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}T${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+    let fecha = new Date; 
     let desdeStr = `${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
     return desdeStr;
   }
