@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   arraySensor:any[]=[];
   arraySensorLabel:any[]=[];
   urlRitmoCardiacoBoolean:boolean = false;
-  img:string = environment.img
+  img:string = environment.img;
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
